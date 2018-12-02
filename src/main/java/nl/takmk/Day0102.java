@@ -17,7 +17,7 @@ public class Day0102 {
         boolean found = false;
 
         while (!found) {
-            System.out.println("next round");
+
             for (Integer cur : input) {
                 currentFrequency = num01 + cur.intValue();
 
