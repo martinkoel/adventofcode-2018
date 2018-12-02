@@ -8,14 +8,9 @@ import java.util.Scanner;
 
 public class Day0202 {
 
-    public final static String[] alphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
-
     public static void main(String[] args) throws FileNotFoundException {
 
         ArrayList<String> input = readFile("input-day02.txt");
-
-        int twos = 0;
-
 
         for (int i = 0; i < input.size(); i++)
             for (int j = 0; j < input.size(); j++) {
@@ -27,7 +22,6 @@ public class Day0202 {
             }
 
     }
-
 
 
     /**
