@@ -8,7 +8,7 @@ public class Day0101 {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        ArrayList<Integer> input = readFile("input-day01-01.txt");
+        ArrayList<Integer> input = readFile("input-day01.txt");
 
         int sum = input.stream().mapToInt(Integer::intValue).sum();
 

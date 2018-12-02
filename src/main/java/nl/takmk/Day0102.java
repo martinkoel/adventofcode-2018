@@ -9,7 +9,7 @@ public class Day0102 {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        ArrayList<Integer> input = readFile("input-day01-01.txt");
+        ArrayList<Integer> input = readFile("input-day01.txt");
         ArrayList<Integer> frequencies = new ArrayList<>();
 
         int num01 = 0;
