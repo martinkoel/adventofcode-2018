@@ -33,14 +33,6 @@ public class Day0402 {
             }
         }
 
-        int slepttime[] = new int[4000];
-
-        for (int j = 0; j < 4000; j++) {
-            for (int t = 0; t < 60; t++) {
-                slepttime[j] = slepttime[j] + data[j][t];
-            }
-        }
-
         int idLongestSleeper = 0;
         int mostMinutes = 0;
         int minuteMostMinutes = 0;
