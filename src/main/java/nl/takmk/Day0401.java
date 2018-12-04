@@ -3,7 +3,6 @@ package nl.takmk;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Day0401 {
@@ -16,14 +15,14 @@ public class Day0401 {
 
         int i = 0;
 
-        while (i < input.size()-3) {
+        // read file (which is already sorted) and store results in data structure
+        while (i < input.size() - 3) {
 
             int guardId = getGuardId(input.get(i++));
 
             while (!nextGuard(input, i)) {
 
                 int fellAsleepAt = getTime(input.get(i++));
-
                 int wokeupAt = getTime(input.get(i++));
 
                 log("Guard " + guardId + " slept from " + fellAsleepAt + " to " + wokeupAt + " - minutes " + (wokeupAt - fellAsleepAt));
@@ -31,37 +30,45 @@ public class Day0401 {
                 for (int time = 0; time < 60; time++) {
                     data[guardId][time] = (data[guardId][time]) + sleptMinutes(time, fellAsleepAt, wokeupAt);
                 }
+            }
+        }
 
+        int slepttime[] = new int[4000];
 
+        for (int j = 0; j < 4000; j++) {
+            for (int t = 0; t < 60; t++) {
+                slepttime[j] = slepttime[j] + data[j][t];
+            }
+        }
+
+        int largestSleptTime = 0;
+        int idLongestSleeper = 0;
+
+        for (int j = 0; j < 4000; j++) {
+            if (slepttime[j] > largestSleptTime) {
+                log("Guard " + j + "slept " + slepttime[j] + "minutes");
+                largestSleptTime = slepttime[j];
+                idLongestSleeper = j;
             }
         }
 
         int mostMinutes = 0;
+        int minuteMostMinutes = 0;
 
-        for(int j=0 ; j< 4000;j ++) {
+        for (int t = 0; t < 60; t++) {
 
-
-            for(int t = 0 ; t < 60 ; t++){
-
-                if (data[j][t] > mostMinutes) {
-                    log("Guard " + j + " at " + t + " slept minutes:" +data[j][t] );
-                    mostMinutes = data[j][t];
-                }
-
-
+            if (data[idLongestSleeper][t] > mostMinutes) {
+                log("Guard " + idLongestSleeper + " at " + t + " slept minutes:" + data[idLongestSleeper][t]);
+                mostMinutes = data[idLongestSleeper][t];
+                minuteMostMinutes = t;
             }
         }
 
-
-
+        log("Answer is id x minute = " + idLongestSleeper + " * " + minuteMostMinutes + " = " + idLongestSleeper * minuteMostMinutes);
     }
 
     private static int sleptMinutes(int time, int fellAsleepAt, int wokeupAt) {
-        if (isAsleep(time, fellAsleepAt, wokeupAt)) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return isAsleep(time, fellAsleepAt, wokeupAt) ? 1 : 0;
     }
 
     private static boolean isAsleep(int time, int fellAsleepAt, int wokeupAt) {
