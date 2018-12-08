@@ -17,13 +17,12 @@ public class Day0801 {
 
         inputArray = (input.get(0)).split(" ");
 
-        log("new node ");
         while (cursor < inputArray.length) {
             log("Cursor at " + cursor);
             processNode();
         }
 
-        log("totl  " + sum);
+        log("Sum of meta information " + sum);
 
     }
 
@@ -39,8 +38,7 @@ public class Day0801 {
         }
 
         while (metas != 0) {
-            sum = sum + Integer.valueOf(inputArray[cursor]);
-            log("meta " + Integer.valueOf(inputArray[cursor++]));
+            sum = sum + Integer.valueOf(inputArray[cursor++]);
             metas--;
         }
 
