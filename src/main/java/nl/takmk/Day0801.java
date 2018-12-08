@@ -8,22 +8,15 @@ import java.util.Scanner;
 public class Day0801 {
 
     static String inputArray[];
-    static int cursor = 0;
-    static int sum = 0;
+    static int cursor = 0, sum = 0;
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        final ArrayList<String> input = readFile("input-day08.txt");
+        inputArray = readFile("input-day08.txt").get(0).split(" ");
 
-        inputArray = (input.get(0)).split(" ");
-
-        while (cursor < inputArray.length) {
-            log("Cursor at " + cursor);
-            processNode();
-        }
+        processNode();
 
         log("Sum of meta information " + sum);
-
     }
 
     private static void processNode() {
@@ -32,14 +25,12 @@ public class Day0801 {
         int nodes = Integer.valueOf(inputArray[cursor++]);
         int metas = Integer.valueOf(inputArray[cursor++]);
 
-        while (nodes != 0) {
+        while (nodes-- != 0) {
             processNode();
-            nodes--;
         }
 
-        while (metas != 0) {
+        while (metas-- != 0) {
             sum = sum + Integer.valueOf(inputArray[cursor++]);
-            metas--;
         }
 
     }
