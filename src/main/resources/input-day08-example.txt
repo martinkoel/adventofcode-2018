@@ -1,1 +1,7 @@
 2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2
+
+A header, which is always exactly two numbers:
+The quantity of child nodes.
+The quantity of metadata entries.
+Zero or more child nodes (as specified in the header).
+One or more metadata entries (as specified in the header).
