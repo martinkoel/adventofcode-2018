@@ -5,25 +5,52 @@ import java.util.ArrayList;
 
 public class Day0901 {
 
+    final static int players = 9;
+    final static int marbles = 25;
+    static int[] playerScore = new int[players + 1];
 
     static int posCurrentMarble = 0;
+    static int currentPlayer = 1;
+
     static ArrayList<Integer> marblesCircle = new ArrayList<>();
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        int players = 9;
-        int marbles = 25;
-
-
         marblesCircle.add(0);
 
+        for (int marble = 1; marble <= marbles; marble++) {
 
-        for (int i = 1; i != marbles; i++) {
+            if (marble % 23 != 0) {
+                addMarble(marble);
+            } else {
+                playerScore[currentPlayer] = playerScore[currentPlayer] + marble;
+                removeMarble();
+                log("marble " + marble);
+            }
 
-            addMarble(i);
-            log(marblesCircle.toString());
+            log(currentPlayer + "-" + posCurrentMarble + "- " + marblesCircle.toString());
+
+            if (currentPlayer < players) {
+                currentPlayer++;
+            } else {
+                currentPlayer = 1;
+            }
         }
 
+
+        for(int i = 0 ; i <= players ; i++) {
+            log(i + "-" + playerScore[i]);
+        }
+
+    }
+
+    private static void removeMarble() {
+
+        playerScore[currentPlayer] = playerScore[currentPlayer] + marblesCircle.get(posCurrentMarble - 7);
+
+        log("removed marble w v" + marblesCircle.get(posCurrentMarble - 7));
+        posCurrentMarble = posCurrentMarble - 7;
+        marblesCircle.remove(posCurrentMarble);
 
     }
 
