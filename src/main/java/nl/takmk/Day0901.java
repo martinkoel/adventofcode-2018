@@ -1,34 +1,37 @@
 package nl.takmk;
 
+import org.magicwerk.brownies.collections.primitive.IntGapList;
+
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 public class Day0901 {
 
-    final static int players = 9;
-    final static int marbles = 25;
-    static int[] playerScore = new int[players + 1];
+    final static int players = 424;
+    final static int marbles = 7148200;
+    static long[] playerScore = new long[players + 1];
 
     static int posCurrentMarble = 0;
     static int currentPlayer = 1;
 
-    static ArrayList<Integer> marblesCircle = new ArrayList<>();
+    static IntGapList marblesCircle = new IntGapList();
 
     public static void main(String[] args) throws FileNotFoundException {
 
         marblesCircle.add(0);
 
+        long startt = System.currentTimeMillis();
+
         for (int marble = 1; marble <= marbles; marble++) {
+
+            if(marble%10000==0) {
+                log("Marble " + marble + " - " + ((System.currentTimeMillis() - startt)/1000)+"s");
+            }
 
             if (marble % 23 != 0) {
                 addMarble(marble);
             } else {
-                playerScore[currentPlayer] = playerScore[currentPlayer] + marble;
-                removeMarble();
-                log("marble " + marble);
+                removeMarble(marble);
             }
-
-            log(currentPlayer + "-" + posCurrentMarble + "- " + marblesCircle.toString());
 
             if (currentPlayer < players) {
                 currentPlayer++;
@@ -37,21 +40,29 @@ public class Day0901 {
             }
         }
 
-
-        for(int i = 0 ; i <= players ; i++) {
-            log(i + "-" + playerScore[i]);
+        long highestScore=0;
+        for (int i = 0; i <= players; i++) {
+           if (highestScore < playerScore[i]) {
+               highestScore=playerScore[i];
+           }
         }
+
+        log("Highest " + highestScore);
 
     }
 
-    private static void removeMarble() {
+    private static void removeMarble(int marble) {
+        playerScore[currentPlayer] = playerScore[currentPlayer] + marble;
 
-        playerScore[currentPlayer] = playerScore[currentPlayer] + marblesCircle.get(posCurrentMarble - 7);
+        if (posCurrentMarble > 7) {
+            posCurrentMarble = posCurrentMarble - 7;
+        } else {
+            posCurrentMarble = marblesCircle.size() - (7 - posCurrentMarble);
+        }
 
-        log("removed marble w v" + marblesCircle.get(posCurrentMarble - 7));
-        posCurrentMarble = posCurrentMarble - 7;
+        playerScore[currentPlayer] = playerScore[currentPlayer] + marblesCircle.get(posCurrentMarble);
+
         marblesCircle.remove(posCurrentMarble);
-
     }
 
     private static void addMarble(int marbleValue) {
