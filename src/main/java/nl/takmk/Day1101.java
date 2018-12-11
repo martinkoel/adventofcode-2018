@@ -6,8 +6,6 @@ public class Day1101 {
      * @See https://adventofcode.com/2018/day/11
      * <p>
      */
-
-
     public static void main(String[] args) {
 
         final int serial = 4842;
@@ -17,30 +15,31 @@ public class Day1101 {
         int yh = 0;
         int bh = 0;
 
-
         // part 1
 
         int blockSize = 3;
 
         for (int x = 1; x < 300 - blockSize; x++) {
             for (int y = 1; y < 300 - blockSize; y++) {
-                if (calcPowerLevelBlock(x, y, blockSize, serial) > highestLevel) {
-                    highestLevel = (calcPowerLevelBlock(x, y, blockSize, serial));
+                int level = calcPowerLevelBlock(x, y, blockSize, serial);
+                if (level > highestLevel) {
+                    highestLevel = level;
                     xh = x;
                     yh = y;
                 }
             }
         }
 
-        log("Highest level is " + highestLevel + " at (" + xh + "," + yh + ") with block size " + bh);
+        log("Highest level is " + highestLevel + " at (" + xh + "," + yh + ") with block size " + blockSize);
 
         // part 2
 
         for (blockSize = 1; blockSize < 300; blockSize++) {
             for (int x = 1; x < 300 - blockSize; x++) {
                 for (int y = 1; y < 300 - blockSize; y++) {
-                    if (calcPowerLevelBlock(x, y, blockSize, serial) > highestLevel) {
-                        highestLevel = (calcPowerLevelBlock(x, y, blockSize, serial));
+                    int level = calcPowerLevelBlock(x, y, blockSize, serial);
+                    if (level > highestLevel) {
+                        highestLevel = level;
                         xh = x;
                         yh = y;
                         bh = blockSize;
@@ -56,7 +55,7 @@ public class Day1101 {
     }
 
     /**
-     * Calculate powerlevel for 3x3 block
+     * Calculate powerlevel for block of blocksize x blocksize
      */
     private static int calcPowerLevelBlock(int startX, int startY, int blockSize, int serial) {
 
