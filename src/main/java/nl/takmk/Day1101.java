@@ -15,30 +15,54 @@ public class Day1101 {
         int highestLevel = 0;
         int xh = 0;
         int yh = 0;
+        int bh = 0;
 
-        for (int x = 1; x < 297; x++) {
-            for (int y = 1; y < 297; y++) {
 
-                if (calcPowerLevelBlock(x, y, serial) > highestLevel) {
-                    highestLevel = (calcPowerLevelBlock(x, y, serial));
-                    xh=x;
-                    yh=y;
+        // part 1
+
+        int blockSize = 3;
+
+        for (int x = 1; x < 300 - blockSize; x++) {
+            for (int y = 1; y < 300 - blockSize; y++) {
+                if (calcPowerLevelBlock(x, y, blockSize, serial) > highestLevel) {
+                    highestLevel = (calcPowerLevelBlock(x, y, blockSize, serial));
+                    xh = x;
+                    yh = y;
                 }
-
             }
         }
 
-        log("Highest level is " + highestLevel + " at (" + xh + "," + yh + ")");
+        log("Highest level is " + highestLevel + " at (" + xh + "," + yh + ") with block size " + bh);
+
+        // part 2
+
+        for (blockSize = 1; blockSize < 300; blockSize++) {
+            for (int x = 1; x < 300 - blockSize; x++) {
+                for (int y = 1; y < 300 - blockSize; y++) {
+                    if (calcPowerLevelBlock(x, y, blockSize, serial) > highestLevel) {
+                        highestLevel = (calcPowerLevelBlock(x, y, blockSize, serial));
+                        xh = x;
+                        yh = y;
+                        bh = blockSize;
+                    }
+
+                }
+            }
+        }
+
+        log("Highest level is " + highestLevel + " at (" + xh + "," + yh + ") with block size " + bh);
+
+
     }
 
     /**
      * Calculate powerlevel for 3x3 block
      */
-    private static int calcPowerLevelBlock(int startX, int startY, int serial) {
+    private static int calcPowerLevelBlock(int startX, int startY, int blockSize, int serial) {
 
         int blockPowerLevel = 0;
-        for (int x = startX; x < startX + 3; x++) {
-            for (int y = startY; y < startY + 3; y++) {
+        for (int x = startX; x < startX + blockSize; x++) {
+            for (int y = startY; y < startY + blockSize; y++) {
                 blockPowerLevel = blockPowerLevel + calcPowerLevel(x, y, serial);
             }
         }
