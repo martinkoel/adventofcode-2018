@@ -15,59 +15,47 @@ public class Day1201 {
      */
     public static void main(String[] args) throws FileNotFoundException {
 
-          long part2 =50000000000L;
-//        ArrayList<String> input = readFile("input-day12-example.txt");
-//        String initialState = ".....#..#.#..##......###...###..............."; //add 5 dots on both sides (as empty pots are on both sides)
         String initialState = ".....#...#####.#..##...##...#.##.#.##.###..##.##.#.#..#...###..####.#.....#..##..#.##......#####..####.............................................................................................................................................................................................................................................................................................................................................................................................................................";
+        String state = initialState;
 
         ArrayList<String> input = readFile("input-day12.txt");
 
-        String state = initialState;
-          log("0: " +state);
+        log("0: " + state);
+
         for (int t = 1; t < 21; t++) {
-
             state = process(state, input);
-
-            if (t % 1000 == 1) {
-           //     log("t" + t);
-            }
-
-                log(t+": "+state);
+            log(t + ": " + state);
         }
 
         int offset = -5;
         int sum = 0;
         for (int i = 0; i < state.length(); i++) {
-
             if (state.substring(i, i + 1).equals("#")) {
                 sum = sum + offset + i;
-                //   log("i "+(offset+i));
             }
-
         }
 
         log("sum:" + sum);
 
         // part 2
+        // by observing the growth pattern, it can be observed that the pattern
+        // is predictable after around 140 iterations
+        // apply this knowledge to calculate the outcome, as it is impossible
+        // to do 50 billion iterations
 
-        //at it=140 and offset 50 this is the situation
+        // first get an "end state" in which the pots related to each other remain the same,
+        // but only their position on the x axis changes every iteration.
+        // get the pattern at the 200th iteration
+        for (int t = 21; t < 201; t++) {
+            state = process(state, input);
+        }
 
-        state ="####.#.....###.#.....####.#.....###.#.....###.#.....###.#....####.#.....###.#....####.#....####.#.....###.#.....####.#...####.#....###.#.....####.#....###.#.....###.#.....####.#....####.#......";
-
-        // at it=50000000000L the state would be shifted 50000000000L-140 positions to the right
-
-
-        // too low  4299999996049
-        // too high 4300000012389
-        long offsetl = 50000000000L+50;
+        long offsetl = 50000000000L - 5 - 200;
         long suml = 0;
-        for (int i = 0;i< state.length(); i++) {
-
+        for (int i = 0; i < state.length(); i++) {
             if (state.substring(i, i + 1).equals("#")) {
                 suml = suml + offsetl + i;
-                //   log("i "+(offset+i));
             }
-
         }
 
         log("suml:" + suml);
@@ -79,7 +67,6 @@ public class Day1201 {
 
         for (int i = 0; i < initialState.length(); i++) {
             for (int y = 0; y < input.size(); y++) {
-
                 newChar = replace(".." + initialState + "...", i, input.get(y));
                 if (!"*".equals(newChar)) {
                     break;
