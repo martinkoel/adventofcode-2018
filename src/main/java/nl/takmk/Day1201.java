@@ -47,6 +47,30 @@ public class Day1201 {
         }
 
         log("sum:" + sum);
+
+        // part 2
+
+        //at it=140 and offset 50 this is the situation
+
+        state ="####.#.....###.#.....####.#.....###.#.....###.#.....###.#....####.#.....###.#....####.#....####.#.....###.#.....####.#...####.#....###.#.....####.#....###.#.....###.#.....####.#....####.#......";
+
+        // at it=50000000000L the state would be shifted 50000000000L-140 positions to the right
+
+
+        // too low  4299999996049
+        // too high 4300000012389
+        long offsetl = 50000000000L+50;
+        long suml = 0;
+        for (int i = 0;i< state.length(); i++) {
+
+            if (state.substring(i, i + 1).equals("#")) {
+                suml = suml + offsetl + i;
+                //   log("i "+(offset+i));
+            }
+
+        }
+
+        log("suml:" + suml);
     }
 
     private static String process(final String initialState, ArrayList<String> input) {
