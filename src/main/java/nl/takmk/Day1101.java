@@ -1,5 +1,7 @@
 package nl.takmk;
 
+import java.util.stream.IntStream;
+
 public class Day1101 {
 
     /**
@@ -18,6 +20,8 @@ public class Day1101 {
         // part 1
 
         int blockSize = 3;
+
+//        IntStream.range(1, 1000).forEach();
 
         for (int x = 1; x < 300 - blockSize; x++) {
             for (int y = 1; y < 300 - blockSize; y++) {

@@ -1,0 +1,16 @@
+
+regel 140
+first dot is -5
+55 chars to first #
+that means that first # is at 50
+
+
+this is situation at iterations = 140
+
+what is situation at iterons = 50000000000?
+
+that is this situation, but only shifted 50000000000-140 times to the right
+
+
+
+.......................................................####.#.....###.#.....####.#.....###.#.....###.#.....###.#....####.#.....###.#....####.#....####.#.....###.#.....####.#...####.#....###.#.....####.#....###.#.....###.#.....####.#....####.#......
