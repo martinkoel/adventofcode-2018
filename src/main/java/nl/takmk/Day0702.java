@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Day0701 {
+public class Day0702 {
 
     public static ArrayList[] instructions = new ArrayList[26];
 
@@ -24,11 +24,16 @@ public class Day0701 {
         }
 
 
-
         String result = "";
+        int lastResultLength = -1;
 
        for (int a =0;a<150;a++) {
+//        while (lastResultLength != result.length() ) {
             for (int i = 0; i < instructions.length; i++) {
+                lastResultLength = result.length();
+                log("current result:" + result);
+                log("instructions: " + i + "-" + instructions[i]);
+
 
 
                 if (!isDone(instructions[i]) && isAvailable(instructions[i])) {
@@ -63,6 +68,16 @@ public class Day0701 {
             }
         }
 
+
+//        for (int i = 0; i < instructions.length; i++) {
+//            //log(i + "-" + instructions[i]);
+//            if (instructions[i].size() > 0) {
+//                log(i + "-" + instructions[i].get(0));
+//            } else {
+//                log(i +"");
+//            }
+//        }
+
         log(result);
 
     }
@@ -72,6 +87,7 @@ public class Day0701 {
         if(instruction.size()>0){log((int)instruction.get(0)+"value" + isDone);};
         return isDone;
     }
+
 
     public static String alphabetPostToString(int alphabetPos) {
         return Character.toString((char) ('a' + alphabetPos));
@@ -112,7 +128,7 @@ public class Day0701 {
 
     private static ArrayList<String> readFile(String fileName) throws FileNotFoundException {
         ArrayList<String> input = new ArrayList<String>();
-        ClassLoader classLoader = Day0701.class.getClassLoader();
+        ClassLoader classLoader = Day0702.class.getClassLoader();
         File file = new File(classLoader.getResource(fileName).getFile());
 
         Scanner scanner = new Scanner(file);
