@@ -1,6 +1,5 @@
 package nl.takmk;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -17,9 +16,7 @@ public class Day0601 {
         final ArrayList<String> input = readFile("input-day06.txt");
 
         int gridDimension = calculateGridDimension(input);
-
         int grid[][] = new int[gridDimension][gridDimension];
-
 
         for (int x = 0; x < gridDimension; x++) {
             for (int y = 0; y < gridDimension; y++) {
